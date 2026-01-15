@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubank - Diga Adeus à Burocracia Bancária</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nu-purple: #A855F7;
+            --nu-purple-dark: #7C3AED;
+            --nu-purple-light: #C084FC;
+            --nu-purple-glow: rgba(168, 85, 247, 0.5);
+            --bg-dark: #1A0B2E;
+            --bg-card: #251447;
+            --bg-card-hover: #2D1A52;
+            --text-primary: #FFFFFF;
+            --text-secondary: #C4B5FD;
+            --text-muted: #71717A;
+            --border-color: #3D2661;
+            --shadow-purple: 0 0 40px rgba(168, 85, 247, 0.15);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Grid Pattern Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(168, 85, 247, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animated Background */
+        .background-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--nu-purple) 0%, var(--nu-purple-dark) 100%);
+            top: -15%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--nu-purple-light) 0%, var(--nu-purple) 100%);
+            bottom: -10%;
+            left: -10%;
+            animation-delay: 7s;
+        }
+
+        .blob-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #7C3AED 0%, #A855F7 100%);
+            top: 40%;
+            left: 40%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .logo {
+            width: 140px;
+            height: 48px;
+            margin: 0 auto 48px;
+            background: linear-gradient(135deg, var(--nu-purple) 0%, var(--nu-purple-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            color: white;
+            font-size: 28px;
+            letter-spacing: -2px;
+            animation: slideDown 0.6s ease-out;
+            box-shadow: var(--shadow-purple);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 9vw, 64px);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 28px;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #A855F7 0%, #EC4899 50%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        .gradient-text::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--nu-purple), transparent);
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: clamp(18px, 4vw, 22px);
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+            font-weight: 400;
+        }
+
+        .subtitle strong {
+            color: var(--nu-purple-light);
+            font-weight: 600;
+        }
+
+        /* Lead Magnet Box */
+        .lead-magnet {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 56px 48px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 48px;
+            border: 1px solid var(--border-color);
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .lead-magnet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--nu-purple), transparent);
+        }
+
+        .lead-magnet::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .ebook-preview {
+            width: 220px;
+            height: 280px;
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ebook-preview::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .ebook-preview:hover {
+            transform: translateY(-12px) rotate(-3deg) scale(1.05);
+            box-shadow: 0 30px 80px rgba(168, 85, 247, 0.4);
+        }
+
+        .ebook-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .ebook-title {
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.3;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .ebook-subtitle {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px;
+            text-align: center;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        .lead-magnet h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .lead-magnet p {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px 24px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--nu-purple);
+            background: rgba(168, 85, 247, 0.05);
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-input:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 22px;
+            background: linear-gradient(135deg, #A855F7 0%, #7C3AED 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+            background: linear-gradient(135deg, #C084FC 0%, #A855F7 100%);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 56px 48px;
+            margin-bottom: 48px;
+            box-shadow: var(--shadow-lg);
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
+            border: 1px solid var(--border-color);
+        }
+
+        .benefits h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 28px;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(168, 85, 247, 0.1);
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.6s ease-out backwards;
+        }
+
+        .benefit-item:hover {
+            background: rgba(168, 85, 247, 0.05);
+            border-color: rgba(168, 85, 247, 0.2);
+            transform: translateX(8px);
+        }
+
+        .benefit-item:nth-child(2) { animation-delay: 0.1s; }
+        .benefit-item:nth-child(3) { animation-delay: 0.2s; }
+        .benefit-item:nth-child(4) { animation-delay: 0.3s; }
+        .benefit-item:nth-child(5) { animation-delay: 0.4s; }
+
+        .benefit-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--nu-purple) 0%, var(--nu-purple-light) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 26px;
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.25);
+        }
+
+        .benefit-content h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .benefit-content p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            background: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
+            border-radius: 32px;
+            padding: 56px 48px;
+            margin-bottom: 48px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.3);
+            animation: fadeInUp 0.8s ease-out 1s backwards;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-proof::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23ffffff' fill-opacity='0.02'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .social-proof > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-proof-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            line-height: 1;
+            letter-spacing: -2px;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-proof-text {
+            font-size: 18px;
+            opacity: 0.95;
+            margin-bottom: 32px;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            font-size: 24px;
+        }
+
+        /* Trust Badges */
+        .trust-section {
+            text-align: center;
+            padding: 32px 0;
+            animation: fadeInUp 0.8s ease-out 1.2s backwards;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge:hover {
+            background: rgba(168, 85, 247, 0.05);
+            border-color: rgba(168, 85, 247, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .trust-badge-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--nu-purple), var(--nu-purple-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        }
+
+        .urgency {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 191, 36, 0.1) 100%);
+            border: 1.5px solid rgba(245, 158, 11, 0.3);
+            border-radius: 16px;
+            padding: 18px 28px;
+            display: inline-block;
+            font-weight: 600;
+            color: #FCD34D;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* CTA Repeat */
+        .cta-repeat {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 56px 48px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            margin-bottom: 48px;
+            animation: fadeInUp 0.8s ease-out 1.4s backwards;
+            border: 1px solid var(--border-color);
+        }
+
+        .cta-repeat h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-repeat p {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 17px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 56px 24px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--nu-purple);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--nu-purple-light);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-info {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0 40px;
+            }
+
+            .lead-magnet, .benefits, .social-proof, .cta-repeat {
+                padding: 32px 24px;
+            }
+
+            .benefit-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .trust-badges {
+                gap: 16px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .loading .cta-button::after {
+            content: '⏳';
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Decoration -->
+    <div class="background-decoration">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="logo">Nu</div>
+            <h1>
+                Diga Adeus à <span class="gradient-text">Burocracia Bancária</span>: Controle Total do Seu Dinheiro em Minutos!
+            </h1>
+            <p class="subtitle">
+                <strong>Milhões de brasileiros</strong> já simplificaram suas finanças com o Nubank. 
+                Baixe agora o <strong>Guia Gratuito "Finanças Sem Complicação"</strong> e aprenda a poupar, 
+                investir e evitar taxas abusivas – tudo no seu celular.
+            </p>
+        </section>
+
+        <!-- Lead Magnet -->
+        <section class="lead-magnet">
+            <div class="ebook-preview">
+                <div class="ebook-icon">📚</div>
+                <div class="ebook-title">Finanças Sem Complicação</div>
+                <div class="ebook-subtitle">Guia Gratuito - 20 páginas</div>
+            </div>
+            <h2>7 Passos para Empoderar Sua Vida Financeira</h2>
+            <p>
+                Guia digital gratuito com checklists, dicas práticas de investimento e simulações de rendimento.
+            </p>
+            
+            <form id="leadForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Digite seu nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="seu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">WhatsApp (Opcional)</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="(00) 00000-0000">
+                </div>
+                
+                <button type="submit" class="cta-button">
+                    📥 Baixar Guia Grátis Agora!
+                </button>
+            </form>
+        </section>
+
+        <!-- Benefits -->
+        <section class="benefits">
+            <h3>O que você vai descobrir no guia:</h3>
+            
+            <div class="benefit-item">
+                <div class="benefit-icon">💰</div>
+                <div class="benefit-content">
+                    <h4>Economize até R$ 500/ano</h4>
+                    <p>Aprenda a identificar e eliminar taxas escondidas que drenam seu dinheiro</p>
+                </div>
+            </div>
+            
+            <div class="benefit-item">
+                <div class="benefit-icon">📈</div>
+                <div class="benefit-content">
+                    <h4>Invista com inteligência</h4>
+                    <p>Rendimento automático de 100% do CDI sem complicação</p>
+                </div>
+            </div>
+            
+            <div class="benefit-item">
+                <div class="benefit-icon">📊</div>
+                <div class="benefit-content">
+                    <h4>Controle total dos gastos</h4>
+                    <p>Notificações inteligentes para acompanhar seus gastos diários em tempo real</p>
+                </div>
+            </div>
+            
+            <div class="benefit-item">
+                <div class="benefit-icon">⚡</div>
+                <div class="benefit-content">
+                    <h4>Crédito rápido e sem burocracia</h4>
+                    <p>Acesso facilitado quando você mais precisa, sem complicações</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof -->
+        <section class="social-proof">
+            <div class="social-proof-number">127M+</div>
+            <p class="social-proof-text">clientes confiam no Nubank!</p>
+            
+            <div class="testimonial">
+                <p class="testimonial-text">
+                    "Finalmente um banco que facilita minha vida! Sem taxas escondidas, 
+                    tudo transparente e super fácil de usar."
+                </p>
+                <p class="testimonial-author">— Cliente Nubank verificado</p>
+            </div>
+            
+            <div class="rating">
+                <span>⭐</span>
+                <span>⭐</span>
+                <span>⭐</span>
+                <span>⭐</span>
+                <span>⭐</span>
+            </div>
+            <p style="margin-top: 8px; opacity: 0.9;">4.8/5 nas principais lojas de apps</p>
+        </section>
+
+        <!-- Trust Section -->
+        <section class="trust-section">
+            <div class="urgency">
+                ⚠️ Oferta gratuita por tempo limitado – mais de 50.000 downloads este mês!
+            </div>
+            
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">🔒</div>
+                    <span>100% Seguro</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✓</div>
+                    <span>Protegido pela LGPD</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">📧</div>
+                    <span>Sem Spam</span>
+                </div>
+            </div>
+            
+            <p style="color: var(--nu-text-light); font-size: 14px; max-width: 500px; margin: 0 auto;">
+                Seus dados estão 100% seguros. Não compartilhamos suas informações e você pode 
+                cancelar a qualquer momento.
+            </p>
+        </section>
+
+        <!-- CTA Repeat -->
+        <section class="cta-repeat">
+            <h3>Pronto para transformar sua vida financeira?</h3>
+            <p>Junte-se a milhões de brasileiros que já deram o primeiro passo</p>
+            <button class="cta-button" onclick="scrollToForm()">
+                🚀 Garanta Seu Guia Grátis e Comece Hoje!
+            </button>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#privacidade">Política de Privacidade</a>
+            <a href="#termos">Termos de Uso</a>
+            <a href="#contato">Contato</a>
+        </div>
+        <div class="footer-info">
+            <p><strong>Nubank</strong> – Nu Holdings Ltd.</p>
+            <p>CNPJ 18.236.120/0001-58</p>
+            <p style="margin-top: 16px; opacity: 0.7;">© 2026 Nubank. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const button = form.querySelector('.cta-button');
+            
+            // Add loading state
+            form.classList.add('loading');
+            button.textContent = 'Processando...';
+            
+            // Get form data
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                phone: form.phone.value
+            };
+            
+            // Simulate API call
+            setTimeout(() => {
+                // In production, you would send this data to your backend/CRM
+                console.log('Form submitted:', formData);
+                
+                // Show success message and redirect
+                alert('🎉 Sucesso! Verifique seu e-mail para baixar o guia.');
+                
+                // Reset form
+                form.reset();
+                form.classList.remove('loading');
+                button.textContent = '📥 Baixar Guia Grátis Agora!';
+                
+                // In production, redirect to thank you page
+                // window.location.href = '/obrigado';
+            }, 1500);
+        }
+        
+        // Scroll to form
+        function scrollToForm() {
+            document.getElementById('leadForm').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+            // Focus on first input
+            setTimeout(() => {
+                document.getElementById('name').focus();
+            }, 500);
+        }
+        
+        // Input validation and formatting
+        document.getElementById('phone')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length > 6) {
+                value = `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7)}`;
+            } else if (value.length > 2) {
+                value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+            }
+            
+            e.target.value = value;
+        });
+        
+        // Add intersection observer for animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe benefit items for stagger animation
+        document.querySelectorAll('.benefit-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-20px)';
+            item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
